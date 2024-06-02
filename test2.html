@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trang web câu hỏi</title>
+    <script src="./script.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        /* Popup container */
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* The actual popup (appears on top) */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Additional styles for the web page layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .scrollable-content {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            padding: 5px;
+            width: 400px;
+            margin-bottom: 10px;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* Styles for the header */
+        .header {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        .nav-link:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Styles for the username dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #3b5998;
+            /* Màu xanh dương */
+            min-width: 100px;
+            z-index: 1;
+            text-align: center;
+            /* Center the content horizontally inside the dropdown */
+        }
+
+        .dropdown-content a {
+            color: white;
+            /* Màu chữ trong dropdown */
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #3d85c6;
+            /* Màu xanh dương nhạt khi hover */
+        }
+
+        /* Additional styles for the dropdown content */
+        .dropdown-content::before {
+            content: " ";
+            position: absolute;
+            top: -10px;
+            right: 50%;
+            margin-right: -5px;
+            /* Center the arrow horizontally */
+            border: 5px solid transparent;
+            border-bottom-color: #3b5998;
+            /* Màu xanh dương của nút */
+        }
+
+        /* Styles for the logout link inside the dropdown */
+        .dropdown-content a.logout-link {
+            color: rgb(255, 251, 0);
+        }
+
+        /* Adjust the positioning of the dropdown content */
+        .username-dropdown {
+            position: relative;
+        }
+
+        /* Styles for the username button */
+        .username-btn {
+            background-color: #3b5998;
+            /* Màu xanh dương */
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Styles for the table */
+        #tableContent {
+            margin: 20px auto;
+            /* Để căn giữa ngang */
+        }
+
+        /* Styles for the question and inputContainer */
+        #question,
+        #inputContainer {
+            margin: 20px auto;
+            /* Để căn giữa ngang */
+            max-width: 800px;
+            /* Giới hạn chiều rộng của các phần tử */
+        }
+
+        #editQuestion1Form,
+        #editQuestion3Form,
+        #editQuestion2Form {
+            margin: 20px auto;
+            /* Để căn giữa ngang */
+            max-width: 600px;
+            /* Giới hạn chiều rộng của các form */
+        }
+
+        table {
+            width: 70%;
+            background-color: #f7d2d2;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Add specific styles for certain columns */
+
+
+        /* Viewport units to set the initial font size and size the elements relative to the viewport */
+        html {
+            font-size: 10px;
+            /* Set the base font size (adjust this as needed) */
+        }
+
+        body {
+            font-size: 1.6rem;
+            /* Use relative font size to adapt to viewport changes */
+        }
+
+        /* Use media queries to adjust styles for different screen sizes */
+        /* For example, below 600px, make the font size smaller and reduce padding */
+        @media (max-width: 600px) {
+            html {
+                font-size: 8px;
+            }
+
+            body {
+                font-size: 1.4rem;
+            }
+
+            .scrollable-content {
+                padding: 5px;
+            }
+        }
+
+        /* Add more media queries and style adjustments as needed for other screen sizes */
+    </style>
+
+    <script>
+
+    </script>
+</head>
+
+<body onload="displayWelcomeMessage(); getList(); checkLogin();">
+
+    <div class="header">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">Trang chủ</a>
+            <a href="https://www.24h.com.vn/" class="nav-link">Tin tức</a>
+            <a href="#" class="nav-link">Liên hệ</a>
+        </div>
+        <div class="dropdown username-dropdown" id="welcomeMessage">
+            <!-- The dropdown content for logout link will be added by JavaScript -->
+        </div>
+    </div>
+    <div class="scrollable-content">
+        <!-- The rest of your HTML content goes here -->
+    </div>
+    <div class="scrollable-content">
+
+        <div id="question" style="text-align: center;
+        ">
+            <select name="Question" onchange="handleQuestionSelection(event)">
+                <option value="menu">Lựa chọn dạng câu hỏi</option>
+                <option value="question1">Dạng câu hỏi 1 đáp án</option>
+                <option value="question2">Dạng câu hỏi điền</option>
+                <option value="question3">Dạng câu hỏi nhiều đáp án</option>
+                <option value="datalist">Danh sách các câu hỏi đã thêm</option>
+            </select>
+            <h2 style="color: bisque;">Danh sách câu hỏi đã thêm</h2>
+        </div>
+
+        <div id="inputContainer" style="width: 300px; text-align: start">
+            <div id="question1Input" class="hidden">
+                <label for="question1">Câu hỏi (Dạng câu hỏi 1 đáp án)</label>
+                <input id="question1" type="text" class="form-input">
+                <label for="answerCount">Số lượng đáp án</label>
+                <input id="answerCount" type="number" onchange="handleAnswerCountChange(event)">
+                <div id="answers-container"></div>
+                <br>
+                <button onclick="saveQuestion()">Lưu</button>
+            </div>
+
+            <div id="question2Input" class="hidden">
+                <label for="question2" class="form-input">Câu hỏi (Dạng câu hỏi điền)</label>
+                <input id="question2" type="text" class="form-input">
+                <label for="answer2" class="form-input">Câu trả lời</label>
+                <input id="answer2" type="text" class="form-input">
+                <br>
+                <button onclick="saveQuestion2()">Lưu</button>
+            </div>
+
+
+            <div id="question3Input" class="hidden">
+                <label for="question3" class="form-input">Câu hỏi (Dạng câu hỏi nhiều đáp án)</label>
+                <input id="question3" type="text" class="form-input">
+                <label for="answerCount3">Số lượng đáp án</label>
+                <input id="answerCount3" type="number" onchange="handleAnswerCountChange3(event)">
+                <div id="answers-container3"></div>
+                <br>
+                <button onclick="saveQuestion3()">Lưu</button>
+            </div>
+
+            <div id="questionList"></div>
+
+
+        </div>
+        <table id="tableContent">
+        </table>
+    </div>
+    <!-- Form chỉnh sửa cho câu hỏi 1 đáp án -->
+    <div id="editQuestion1Form" style="display: none; text-align: center;">
+        <label for="editQuestion1" class="form-input">Câu hỏi (Dạng câu hỏi 1 đáp án)</label>
+        <input id="editQuestion1" type="text" class="form-input">
+        <label for="editAnswerCount">Số lượng đáp án</label>
+        <br>
+        <input id="editAnswerCount" type="number" onchange="handleAnswerCountChange(event)">
+        <div id="editAnswers-container" style="margin: 10px auto 10px;"></div>
+        <button onclick="updateQuestion1()">Cập nhật</button>
+    </div>
+
+    <!-- Form chỉnh sửa cho câu hỏi nhiều đáp án -->
+    <div id="editQuestion3Form" style="display: none; text-align: center;">
+        <label for="editQuestion3" class="form-input">Câu hỏi (Dạng câu hỏi nhiều đáp án)</label>
+        <input id="editQuestion3" type="text" class="form-input">
+        <label for="editAnswerCount3">Số lượng đáp án</label>
+        <input id="editAnswerCount3" type="number" onchange="handleAnswerCountChange3(event)">
+        <div id="editAnswers-container3" style="margin: 10px auto 10px;"></div>
+        <button onclick="updateQuestion3()">Cập nhật</button>
+    </div>
+
+    <!-- Form chỉnh sửa cho câu hỏi điền -->
+    <div id="editQuestion2Form" style="display: none; text-align: center;">
+        <label for="editQuestion2" class="form-input">Câu hỏi (Dạng câu hỏi điền)</label>
+        <input id="editQuestion2" type="text" class="form-input">
+        <label for="editAnswer2" class="form-input">Câu trả lời</label>
+        <input id="editAnswer2" type="text" class="form-input"><br>
+        <button onclick="updateQuestion2()">Cập nhật</button>
+    </div>
+    <div style="text-align: center; margin: 30px;">Copyright © LGD</div>
+</body>
+
+</html>

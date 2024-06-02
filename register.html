@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Trang đăng ký</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="checkLogin1()">
+  <div class="register-container">
+    <h2>Đăng ký tài khoản</h2>
+    <form id="registerForm">
+      <label for="username">Tên đăng nhập:</label>
+      <input type="text" id="username" name="username">
+      <br>
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" name="password">
+      <br>
+      <label for="confirmPassword">Xác nhận mật khẩu:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword">
+      <br>
+      <div class="button-container">
+        <input type="submit" value="Đăng ký">
+        <input type="button" value="Đăng nhập" onclick="goToLogin()">
+      </div>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body onload="displayWelcomeMessage();">
+  <div class="header">
+    <div class="navbar">
+      <a href="index.html" class="nav-link">Trang chủ</a>
+      <a href="https://www.24h.com.vn/" class="nav-link">Tin tức</a>
+      <a href="#" class="nav-link">Liên hệ</a>
+    </div>
+    <div class="dropdown username-dropdown" id="welcomeMessage">
+      <!-- The dropdown content for logout link will be added by JavaScript -->
+    </div>
+  </div>
+
+  <h1 style="color: rgb(31, 182, 102); text-align: center; margin: 40px;">Welcome to the Home Page</h1>
+  <div id="userContainer">
+    <p style="color: bisque;" id="welcomeMessage"></p>
+  </div>
+
+  <div class="main">
+    <div class="content">
+      <img src="img/HTML.png" alt="Ảnh HTML">
+      <div class="text">
+      </div>
+      <div class="join">
+        <button onclick="goToWeb_HTML()" type=" submit">Vào học</button>
+      </div>
+    </div>
+    <div class="content">
+      <img src="img/CSS.png" alt="Ảnh CSS">
+      <div class="text">
+      </div>
+      <div class="join">
+        <button onclick="goToWeb_CSS()" type="submit">Vào học</button>
+      </div>
+    </div>
+    <div class="content">
+      <img src="img/JS.png" alt="Ảnh JavaScript">
+      <div class="text" style="left: 35px;">
+      </div>
+      <div class="join">
+        <button onclick="goToWeb_JS()" type="submit">Vào học</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

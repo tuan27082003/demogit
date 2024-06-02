@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trang web câu hỏi</title>
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+
+    <script>
+
+    </script>
+</head>
+
+
+<body onload="displayWelcomeMessage(); getList(); checkLogin();">
+
+    <div class="header">
+        <div class="navbar">
+            <a href="index.html" class="nav-link">Trang chủ</a>
+            <a href="https://www.24h.com.vn/" class="nav-link">Tin tức</a>
+            <a href="#" class="nav-link">Liên hệ</a>
+        </div>
+        <div class="dropdown username-dropdown" id="welcomeMessage">
+        </div>
+    </div>
+    <div class="scrollable-content">
+        <!-- The rest of your HTML content goes here -->
+    </div>
+    <div class="scrollable-content">
+
+        <div id="question" style="text-align: center;">
+            <select name="Question" onchange="handleQuestionSelection(event)">
+                <option value="menu">Lựa chọn dạng câu hỏi</option>
+                <option value="question1">Dạng câu hỏi 1 đáp án</option>
+                <option value="question2">Dạng câu hỏi điền</option>
+                <option value="question3">Dạng câu hỏi nhiều đáp án</option>
+                <option value="datalist">Danh sách các câu hỏi đã thêm</option>
+            </select>
+            <h2 style="color: rgb(47, 39, 28); margin: 20px;">Danh sách câu hỏi đã thêm</h2>
+        </div>
+        <div id="inputContainer">
+            <div id="question1Input" class="hidden">
+                <label for="question1">Câu hỏi (Dạng câu hỏi 1 đáp án)</label>
+                <input id="question1" type="text" class="form-input">
+                <label for="answerCount">Số lượng đáp án</label>
+                <input id="answerCount" type="number" onchange="handleAnswerCountChange(event)">
+                <div id="answers-container"></div>
+                <br>
+                <button onclick="saveQuestion()">Lưu</button>
+            </div>
+
+            <div id="question2Input" class="hidden">
+                <label for="question2">Câu hỏi (Dạng câu hỏi điền)</label>
+                <input id="question2" type="text" class="form-input">
+                <label for="answer2">Câu trả lời</label>
+                <input id="answer2" type="text" class="form-input">
+                <br>
+                <button onclick="saveQuestion2()">Lưu</button>
+            </div>
+
+
+            <div id="question3Input" class="hidden">
+                <label for="question3">Câu hỏi (Dạng câu hỏi nhiều đáp án)</label>
+                <input id="question3" type="text" class="form-input">
+                <label for="answerCount3">Số lượng đáp án</label>
+                <input id="answerCount3" type="number" onchange="handleAnswerCountChange3(event)">
+                <div id="answers-container3"></div>
+                <br>
+                <button onclick="saveQuestion3()">Lưu</button>
+            </div>
+
+            <div id="questionList"></div>
+
+            <div class="modal-background" id="modalBackground"></div>
+            <div class="modal-form" id="questionDetailForm">
+                <h2>Chi tiết câu hỏi</h2>
+                <form>
+                    <label for="questionDetail">Câu hỏi:</label>
+                    <textarea id="questionDetail" readonly></textarea>
+                    <br>
+                    <label for="questionTypeDetail">Loại câu hỏi:</label>
+                    <input type="text" id="questionTypeDetail" readonly>
+                    <br>
+                    <span class="close-button" id="closeButton">&times;</span>
+                </form>
+            </div>
+
+
+
+
+        </div>
+        <table id="tableContent">
+        </table>
+    </div>
+    <!-- Form chỉnh sửa cho câu hỏi 1 đáp án -->
+    <div id="editQuestion1Form" style="display: none; text-align: center;">
+        <label for="editQuestion1">Câu hỏi (Dạng câu hỏi 1 đáp án)</label>
+        <input id="editQuestion1" type="text" class="form-input">
+        <label for="editAnswerCount">Số lượng đáp án</label>
+        <br>
+        <input id="editAnswerCount" type="number" onchange="handleAnswerCountChange(event)">
+        <div id="editAnswers-container" style="margin: 10px auto 10px;"></div>
+        <button onclick="updateQuestion1()">Cập nhật</button>
+    </div>
+
+    <!-- Form chỉnh sửa cho câu hỏi nhiều đáp án -->
+    <div id="editQuestion3Form" style="display: none; text-align: center;">
+        <label for="editQuestion3">Câu hỏi (Dạng câu hỏi nhiều đáp án)</label>
+        <input id="editQuestion3" type="text" class="form-input">
+        <label for="editAnswerCount3">Số lượng đáp án</label>
+        <input id="editAnswerCount3" type="number" onchange="handleAnswerCountChange3(event)">
+        <div id="editAnswers-container3" style="margin: 10px auto 10px;"></div>
+        <button onclick="updateQuestion3()">Cập nhật</button>
+    </div>
+
+    <!-- Form chỉnh sửa cho câu hỏi điền -->
+    <div id="editQuestion2Form" style="display: none; text-align: center;">
+        <label for="editQuestion2">Câu hỏi (Dạng câu hỏi điền)</label>
+        <input id="editQuestion2" type="text" class="form-input">
+        <label for="editAnswer2">Câu trả lời</label>
+        <input id="editAnswer2" type="text" class="form-input"><br>
+        <button onclick="updateQuestion2()">Cập nhật</button>
+    </div>
+    <div style="text-align: center; margin: 30px;">Copyright © LGD</div>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trang web câu hỏi</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        /* Popup container */
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* The actual popup (appears on top) */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Additional styles for the web page layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .scrollable-content {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            padding: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    </style>
+    <script src="./script.js"></script>
+    <script>
+
+    </script>
+</head>
+
+<body onload="getList(); checkLogin();">
+    <div class="scrollable-content">
+        <button onclick="goToIndex()">Trang chủ</button>
+
+        <div id="question">
+            <select name="Question" onchange="handleQuestionSelection(event)">
+                <option value="menu">Lựa chọn dạng câu hỏi</option>
+                <option value="question1">Dạng câu hỏi 1 đáp án</option>
+                <option value="question2">Dạng câu hỏi điền</option>
+                <option value="question3">Dạng câu hỏi nhiều đáp án</option>
+                <option value="datalist">Danh sách các câu hỏi đã thêm</option>
+            </select>
+            <h2 style="color: bisque;">Danh sách câu hỏi đã thêm</h2>
+        </div>
+
+        <div id="inputContainer">
+            <div id="question1Input" class="hidden">
+                <label for="question1">Câu hỏi (Dạng câu hỏi 1 đáp án)</label>
+                <input id="question1" type="text" class="form-input">
+                <label for="answerCount">Số lượng đáp án</label>
+                <input id="answerCount" type="number" onchange="handleAnswerCountChange(event)">
+                <div id="answers-container"></div>
+                <button onclick="saveQuestion()">Lưu</button>
+            </div>
+
+            <div id="question2Input" class="hidden">
+                <label for="question2" class="form-input">Câu hỏi (Dạng câu hỏi điền)</label>
+                <input id="question2" type="text" class="form-input">
+                <label for="answer2">Câu trả lời</label>
+                <input id="answer2" type="text">
+                <button onclick="saveQuestion2()">Lưu</button>
+            </div>
+
+
+            <div id="question3Input" class="hidden">
+                <label for="question3">Câu hỏi (Dạng câu hỏi nhiều đáp án)</label>
+                <input id="question3" type="text">
+                <label for="answerCount3">Số lượng đáp án</label>
+                <input id="answerCount3" type="number" onchange="handleAnswerCountChange3(event)">
+                <div id="answers-container3"></div>
+                <button onclick="saveQuestion3()">Lưu</button>
+            </div>
+
+            <div id="questionList"></div>
+
+
+        </div>
+        <table id="tableContent">
+        </table>
+    </div>
+    <!-- Pop-up div -->
+    <!-- Form chỉnh sửa cho câu hỏi 1 đáp án -->
+    <div id="editQuestion1Form" style="display: none;">
+        <label for="editQuestion1">Câu hỏi (Dạng câu hỏi 1 đáp án)</label>
+        <input id="editQuestion1" type="text" class="form-input">
+        <label for="editAnswerCount">Số lượng đáp án</label>
+        <input id="editAnswerCount" type="number" onchange="handleAnswerCountChange(event)">
+        <div id="editAnswers-container"></div>
+        <button onclick="updateQuestion1()">Cập nhật</button>
+    </div>
+
+    <!-- Form chỉnh sửa cho câu hỏi nhiều đáp án -->
+    <div id="editQuestion3Form" style="display: none;">
+        <label for="editQuestion3">Câu hỏi (Dạng câu hỏi nhiều đáp án)</label>
+        <input id="editQuestion3" type="text">
+        <label for="editAnswerCount3">Số lượng đáp án</label>
+        <input id="editAnswerCount3" type="number" onchange="handleAnswerCountChange3(event)">
+        <div id="editAnswers-container3"></div>
+        <button onclick="updateQuestion3()">Cập nhật</button>
+    </div>
+
+    <!-- Form chỉnh sửa cho câu hỏi điền -->
+    <div id="editQuestion2Form" style="display: none;">
+        <label for="editQuestion2" class="form-input">Câu hỏi (Dạng câu hỏi điền)</label>
+        <input id="editQuestion2" type="text" class="form-input">
+        <label for="editAnswer2">Câu trả lời</label>
+        <input id="editAnswer2" type="text">
+        <button onclick="updateQuestion2()">Cập nhật</button>
+    </div>
+
+
+
+</body>
+
+</html>

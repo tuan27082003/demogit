@@ -1,0 +1,489 @@
+/* CSS cho trang login và register */
+.login-container,
+.register-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.login-container h2,
+.register-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-container label,
+.register-container label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.login-container input[type="text"],
+.register-container input[type="text"],
+.login-container input[type="password"],
+.register-container input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.login-container .button-container,
+.register-container .button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-container .button-container input[type="submit"],
+.register-container .button-container input[type="submit"],
+.login-container .button-container input[type="button"],
+.register-container .button-container input[type="button"] {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer; /*di chuyen vao hien ban*/
+}
+
+.login-container .button-container input[type="submit"],
+.register-container .button-container input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.login-container .button-container input[type="button"],
+.register-container .button-container input[type="button"] {
+  background-color: #555;
+  color: white;
+}
+
+.login-container .button-container input[type="submit"]:hover,
+.register-container .button-container input[type="submit"]:hover,
+.login-container .button-container input[type="button"]:hover,
+.register-container .button-container input[type="button"]:hover {
+  background-color: #3D8B40;
+}
+
+/* CSS cho trang Web */
+
+.err-message {
+  color: red;
+}
+
+#tableHeader {
+  position: sticky;
+  top: 0;
+  background-color: #f2f2f2;
+}
+
+.main {
+  background-color: #000;
+  width: 75%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.content {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: #fff;
+  margin: 10px;
+  border: 3px solid transparent;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.content:hover {
+  border-color: red;
+}
+
+.content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content .join {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute; 
+}
+
+.content .join button {
+  background-color: cyan;
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+
+/* body {
+  background-image: url("/img/Back-ground-800x450.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+html {  /* phần chữ text trên cùng */
+  font-size: 8px;
+}
+
+/* CSS JS_Web */
+.hidden {
+  display: none;
+}
+
+
+.scrollable-content {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+button { /*ô trang chủ web css*/
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+select { /*ô lựa chọn câu hỏi */
+  padding: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+label { /*phần ô để nhập câu hỏi va so luong dap an*/
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input { /*ô input*/
+  padding: 5px;
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 1.6rem;
+  text-align: center
+
+}
+
+/* Styles for the header tiêu đề trên cùng */
+.header {
+  background-color: #333;
+  color: rgb(208, 38, 38);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.nav-link { /*phần text của ô tiêu đề*/
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+.nav-link:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Styles for the username dropdown */
+.dropdown-content { /*phần góc bên phải bên cùng*/
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #24d155; /*phần đx và đổi mk */
+  min-width: 100px;
+  z-index: 1;
+  text-align: center;
+  /* Center the content horizontally inside the dropdown */
+}
+
+.dropdown-content a { 
+  color: white;
+  /* màu trong đổi mk */
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #5e77aa;
+  /* Màu xanh dương nhạt khi hover */
+}
+
+/* Các kiểu bổ sung cho nội dung thả xuống(dấu mũi tên) */
+.dropdown-content::before {
+  content: " ";
+  position: absolute;
+  top: -10px;
+  right: 50%;
+  margin-right: -5px;
+  /* Center the arrow horizontally */
+  border: 5px solid transparent;
+  border-bottom-color: #3b5998;
+  /* Màu xanh dương của nút */
+}
+
+/* Styles for the logout link inside the dropdown */
+.dropdown-content a.logout-link {/*phần chữ đx*/
+  color: rgb(255, 251, 0);
+}
+
+/* Adjust the positioning of the dropdown content */
+.username-dropdown {
+  position: relative;
+}
+
+/* chỗ phần tên người dùng */
+.username-btn {
+  background-color: #3b5998;
+  /* Màu xanh dương */
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Styles for the table */
+#tableContent { /*ô của trong trang css và js*/
+  margin: 20px auto;
+}
+
+
+#question,/* Chỗ phần bao quát trên cùng  */
+#inputContainer {
+  margin: 20px auto;
+  max-width: 800px;
+  /* Giới hạn chiều rộng của các phần tử */
+}
+
+#editQuestion1Form,
+#editQuestion3Form,
+#editQuestion2Form {
+  margin: 20px auto;
+  /* Để căn giữa ngang */
+  max-width: 600px;
+  /* Giới hạn chiều rộng của các form */
+}
+
+table { /* bảng */
+  width: 70%;
+  background-color: #f7d2d2;
+  border-collapse:collapse; /* liền ô với nhau */
+}
+
+th,/* phần trên cùng của bảng */
+td /* phần dưới */{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Add specific styles for certain columns */
+.question {
+  width: 80px;
+}
+
+.question-type {
+  width: 50px;
+}
+
+.user {
+  width: 30px;
+}
+
+.time {
+  width: 30px;
+}
+
+.status {
+  width: 25px;
+}
+
+.detail {
+  width: 25px;
+  text-align: center;
+}
+
+.function {
+  width: 20px;
+  text-align: center;
+}
+
+
+@media (max-width: 600px) { /*lăn chuột*/
+  html {
+      font-size: 8px;
+  }
+
+  .scrollable-content {
+      padding: 5px;
+  }
+}
+
+/* CSS cho form hiển thị chi tiết câu hỏi */
+#questionDetailForm {
+  display: none;
+  /* Ẩn form ban đầu */
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+#questionDetailForm h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#questionDetailForm label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+#questionDetailForm textarea,
+#questionDetailForm input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+/* CSS cho nền mờ */
+.modal-background {
+  display: none;
+  /* Ẩn nền mờ ban đầu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* CSS cho form hiển thị chi tiết câu hỏi */
+.modal-form {
+  display: none;
+  /* Ẩn form ban đầu */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  text-align: center;
+  z-index: 2;
+}
+
+/* CSS cho nút "X" */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: red;
+}
+
+/* Popup container*/
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+} 
+
+/* The actual popup (appears on top)
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+} */
+
+/* Popup arrow */
+/* .popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+} */
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+ /* .popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}   */
+
+/* Add animation (fade in the popup) */
+/* @-webkit-keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+} */
